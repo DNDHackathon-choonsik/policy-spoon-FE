@@ -22,7 +22,7 @@ const Fab = ({
 
   return (
     <>
-      <div className="fixed bottom-[120px] right-[150px]">
+      <div className="fixed bottom-[120px] right-[20px]">
         <button onClick={_onClick} className={fabClasses}>
           {_bottomNode && (
             <div className="flex flex-col items-center pt-1">
