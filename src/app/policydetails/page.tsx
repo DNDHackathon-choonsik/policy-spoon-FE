@@ -1,6 +1,9 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import BlueGoBack from "@/svgs/bluegoback.svg";
+import { useRouter } from "next/navigation";
+import router from "next/router";
 
 const PolicyDetailsPage = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -9,9 +12,17 @@ const PolicyDetailsPage = () => {
     setIsBookmarked(!isBookmarked);
   };
 
+  const handleGoBack = () => {
+    router.back();
+  };
+
   return (
     <div className="relative w-full h-180 bg-white">
       <div className="w-96 h-150 relative bg-white mx-auto">
+        <BlueGoBack
+          className="w-6 h-6 absolute top-[55px] left-6 cursor-pointer"
+          onClick={handleGoBack}
+        />
         <div className="left-[157px] top-[53px] absolute text-blue-900 text-lg font-extrabold font-['Tenada'] leading-relaxed">
           정책스푼
         </div>
