@@ -9,7 +9,7 @@ type Props = {
 
 const ChatBubble = ({ _from, _text, _time }: Props) => {
   return (
-    <span
+    <div
       className={twMerge(
         "relative w-fit px-4 py-2 font-noto text-[13px] drop-shadow-sm",
         _from === "me"
@@ -20,15 +20,15 @@ const ChatBubble = ({ _from, _text, _time }: Props) => {
       {_text}
       <span
         className={twMerge(
-          "absolute bottom-0  text-white",
+          "absolute bottom-0 text-white text-xs",
           _from === "me"
             ? "-left-2 -translate-x-full"
-            : "-right-2 translate-x-full"
+            : "-right-2 translate-x-full text-gray-700"
         )}
       >
         {dayjs(_time).format("HH:mm")}
       </span>
-    </span>
+    </div>
   );
 };
 

@@ -38,6 +38,13 @@ const Page = () => {
       setReceivedMessages(["안녕하세요! 👋 AI 챗봇입니다."]);
     }
   }, [initialMessageSent]);
+
+  useEffect(() => {
+    if (!initialMessageSent) {
+      setInitialMessageSent(true);
+      setReceivedMessages(["안녕하세요! 👋 AI 챗봇입니다."]);
+    }
+  }, [initialMessageSent]);
   return (
     <>
       <TopBottomBarTemplate
@@ -94,4 +101,5 @@ const Page = () => {
     </>
   );
 };
+
 export default Page;
