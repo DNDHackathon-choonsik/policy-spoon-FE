@@ -3,8 +3,21 @@ import Logo from "@/svgs/spoonLogo.svg";
 import Money from "@/svgs/Money.svg";
 import Search from "@/svgs/search.svg";
 import BasicInput from "@/components/Input/BasicInput";
-import { useRef, useState, MouseEvent } from "react";
+import { useRef, useState, MouseEvent, useEffect } from "react";
 import Box from "@/components/Box/Box";
+import Banner1 from "@/svgs/Banner1.svg";
+import Banner2 from "@/svgs/Banner2.svg";
+import Banner3 from "@/svgs/Banner3.svg";
+import Review1 from "@/svgs/review1.svg";
+import Review2 from "@/svgs/review2.svg";
+import Review3 from "@/svgs/review3.svg";
+import Review4 from "@/svgs/review4.svg";
+import blueCircle from "@/svgs/blueCircle.svg";
+import grayCircle from "@/svgs/grayCircle.svg";
+import Pencil from "@/svgs/bluepencil.svg";
+import Button from "@/components/Button/Button";
+import Fab from "@/components/FAB/Fab";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const categoryList = [
@@ -15,6 +28,39 @@ const Page = () => {
     "🙌  참여∙권리",
     "💼  일자리",
   ];
+
+  //   const reviewList = [
+  //     {
+  //       key: 1,
+  //       title: "청년 통장 발급 후기",
+  //       metaData: "으뜸 관악 청년 통장",
+  //       category: "복지∙문화",
+  //       path: "../../svgs/review1.svg",
+  //       background: "#FFEDE0",
+  //       color: "#FF8E3D",
+  //     },
+  //     {
+  //       key: 2,
+  //       title: "취업 멘토링 꽤 괜찮네요",
+  //       metaData: "관악구∙삼성전자 청년 취업 멘토링",
+  //       category: "교육",
+  //       path: "../../svgs/review2.svg",
+  //     },
+  //     {
+  //       key: 3,
+  //       title: "청년주택 입주 신청했어요",
+  //       metaData: "관악구 청년주택 입주자 추가 모집",
+  //       category: "주거",
+  //       path: `../../svgs/review3.svg`,
+  //     },
+  //     {
+  //       key: 4,
+  //       title: "신림동 쓰리룸 방문 후기",
+  //       metaData: "청년문화공간 신림동 쓰리룸 운영",
+  //       category: "참여∙권리",
+  //       path: "../../svgs/review4.svg",
+  //     },
+  //   ];
 
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
 
@@ -66,6 +112,23 @@ const Page = () => {
   const delay = 30; /* 좌우로 넘길 때, delay 되는 시간 */
   const onThrottleDragMove = throttle(onDragMove, delay);
 
+  const banners = [
+    <Banner1 key="1" />,
+    <Banner2 key="2" />,
+    <Banner3 key="3" />,
+  ];
+  const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBannerIndex((prevIndex) => (prevIndex + 1) % banners.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [banners.length]);
+
+  const circleColors = [blueCircle, grayCircle, grayCircle];
+
+  const router = useRouter();
   return (
     <>
       <div className="bg-[#E7EBF9] h-[289px] relative">
@@ -102,7 +165,7 @@ const Page = () => {
             정책 카테고리
           </h2>
           <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-1 mx-auto py-4">
+            <div className="grid grid-cols-1 mx-auto py-2">
               <div
                 className="p-1 flex gap-2 overflow-x-scroll transition-all duration-500"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
@@ -138,7 +201,113 @@ const Page = () => {
           <h1 className="font-bold text-[20px] text-black">
             <span className="text-primary-200">내 맞춤형</span> 정책
           </h1>
+          <div className="relative overflow-hidden">
+            <div
+              className="whitespace-nowrap transition-transform duration-500"
+              style={{ transform: `translateX(-${currentBannerIndex * 100}%)` }}
+            >
+              {banners.map((Banner, index) => (
+                <div
+                  key={index}
+                  className="inline-block w-full"
+                  style={{ width: "100%" }}
+                >
+                  {Banner}
+                </div>
+              ))}
+            </div>
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-4 flex items-center space-x-2">
+              {circleColors.map((circle, index) => (
+                <img
+                  key={index}
+                  src={circle}
+                  alt={`Circle ${index + 1}`}
+                  className={`w-4 h-4 ${
+                    index === currentBannerIndex
+                      ? "text-blue-500"
+                      : "text-gray-500"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
+        <div>
+          <div className="flex justify-between py-2">
+            <h1 className="font-bold text-[20px] text-black">
+              <span className="text-primary-200">내 맞춤형</span> 정책의 후기
+            </h1>
+            <Button className="p-2 gap-1 flex items-center justify-center w-[109px] h-[26px] rounded-[8px] bg-primary-100 font-bold text-[13px] text-primary-200">
+              후기 작성하기 <Pencil />
+            </Button>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="gap-4">
+              <Review1 />
+              <h1 className="font-semibold text-[15px] text-black">
+                청년 통장 발급 후기
+              </h1>
+              <p className="font-medium text-[12px] text-[#37383C]">
+                으뜸 관악 청년 통장
+              </p>
+              <Box
+                className="px-2 py-0 rounded-[4px] flex items-center justify-center font-medium text-[12px] text-[#FF8E3D] bg-[#FFEDE0]"
+                style={{ display: "inline-block" }}
+              >
+                복지∙문화
+              </Box>
+            </div>
+            <div className="gap-4">
+              <Review2 />
+              <h1 className="font-semibold text-[15px] text-black">
+                취업 멘토링 꽤 괜찮네요
+              </h1>
+              <p className="font-medium text-[12px] text-[#37383C]">
+                관악구∙삼성전자 청년 취업 멘토링
+              </p>
+              <Box
+                className="px-2 py-0 rounded-[4px] flex items-center justify-center font-medium text-[12px] text-[#6CBC3C] bg-[#EBF8E8]"
+                style={{ display: "inline-block" }}
+              >
+                교육
+              </Box>
+            </div>
+            <div className="gap-4">
+              <Review3 />
+              <h1 className="font-semibold text-[15px] text-black">
+                청년주택 입주 신청했어요
+              </h1>
+              <p className="font-medium text-[12px] text-[#37383C]">
+                관악구 청년주택 입주자 추가 모집
+              </p>
+              <Box
+                className="px-2 py-0 rounded-[4px] flex items-center justify-center font-medium text-[12px] text-[#5B99FF] bg-[#EAF2FF]"
+                style={{ display: "inline-block" }}
+              >
+                주거
+              </Box>
+            </div>
+            <div className="gap-4">
+              <Review4 />
+              <h1 className="font-semibold text-[15px] text-black">
+                신림동 쓰리룸 방문 후기
+              </h1>
+              <p className="font-medium text-[12px] text-[#37383C]">
+                청년문화공간 신림동 쓰리룸 운영
+              </p>
+              <Box
+                className="px-2 py-0 rounded-[4px] flex items-center justify-center font-medium text-[12px] text-[#8D93FF] bg-[#EEEFFF]"
+                style={{ display: "inline-block" }}
+              >
+                참여∙권리
+              </Box>
+            </div>
+          </div>
+        </div>
+        <Fab
+          _onClick={() => router.push("/chatbot")}
+          _bottomNode={"AI 정책 상담하기"}
+        />
       </div>
     </>
   );
