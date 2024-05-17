@@ -5,6 +5,22 @@ import Search from "@/svgs/search.svg";
 import BasicInput from "@/components/Input/BasicInput";
 import { useRef, useState, MouseEvent } from "react";
 import Box from "@/components/Box/Box";
+<<<<<<< Updated upstream
+=======
+import Banner1 from "@/svgs/Banner1.svg";
+import Banner2 from "@/svgs/Banner2.svg";
+import Banner3 from "@/svgs/Banner3.svg";
+import Review1 from "@/svgs/Review1.svg";
+import Review2 from "@/svgs/Review2.svg";
+import Review3 from "@/svgs/Review3.svg";
+import Review4 from "@/svgs/review4.svg";
+import blueCircle from "@/svgs/blueCircle.svg";
+import grayCircle from "@/svgs/grayCircle.svg";
+import Pencil from "@/svgs/bluepencil.svg";
+import Button from "@/components/Button/Button";
+import Fab from "@/components/FAB/Fab";
+import { useRouter } from "next/navigation";
+>>>>>>> Stashed changes
 
 const Page = () => {
   const categoryList = [

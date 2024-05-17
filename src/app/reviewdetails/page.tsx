@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Review1 from "@/svgs/Review1.svg";
-import Review2 from "@/svgs/Review2.svg";
-import Review3 from "@/svgs/Review3.svg";
+import Review_1 from "@/svgs/Review_1.svg";
+import Review_2 from "@/svgs/Review_2.svg";
+import Review_3 from "@/svgs/Review_3.svg";
 import Check from "@/svgs/Check.svg";
 import Link from "next/link";
 import BookMark from "@/svgs/BookMark.svg";
@@ -43,7 +43,8 @@ const ReviewDetailsPage = () => {
             <BookMark className="w-6 h-6" />
           )}
         </div>
-        <Review1 className="w-full" />
+        <Review_1 className="w-full" />
+
         <div className="Group10445 w-60 h-20 left-[16px] top-[280px] absolute">
           <div className="px-2 py-px left-0 top-0 absolute bg-orange-100 rounded justify-start items-center gap-2.5 inline-flex">
             <div className="text-center text-orange-400 text-xs font-medium font-['Pretendard']">
@@ -103,7 +104,7 @@ const ReviewDetailsPage = () => {
         새롭습니다.
         <br />
         <div>
-          <Review2 className="w-full" />
+          <Review_2 className="w-full" />
         </div>
         <br />
         아무래도 준비해야 할 서류들도 많고 주민센터에도 따로 방문을 해야했어서
@@ -116,7 +117,7 @@ const ReviewDetailsPage = () => {
         홈페이지에 들어가서 확인해보시길 바랍니다~!
         <br />
         <div>
-          <Review3 className="w-full" />
+          <Review_3 className="w-full" />
         </div>
       </div>
       <div className="w-80 h-36 left-[16px] top-[1610px] absolute text-black text-base font-normal font-['Pretendard'] leading-normal">
