@@ -64,20 +64,21 @@ export default function LoginPage() {
 
   return (
     <ReactQueryClientProvider>
-      <div className="Frame10453 w-96 h-96 relative bg-white flex flex-col items-center justify-between">
-        <div className="w-24 h-6 mt-16"></div>
-        <div className="text-blue-900 text-xl font-normal font-['Pretendard'] leading-loose mt-4">
-          정책을 빠르고 쉽게 맛보다!
-        </div>
-        <MainSpoon className="mt-4" />
-        <div className="Group10429 w-80 h-12">
-          <KakaoLoginButton onClick={handleKakaoLogin} />
-        </div>
-        <div className="OsBarBottomNavigation h-12 bg-zinc-500/opacity-10 flex justify-center items-center w-full">
+      <div className="flex items-center justify-center min-h-screen bg-white">
+        <div className="Frame10453 w-96 h-96 relative bg-white flex flex-col items-center justify-between">
+          <div className="w-24 h-6 mt-16"></div>
           <SpoonLogo />
-        </div>
-        <div className="OsBarTopNavigation h-9 w-full bg-zinc-500/opacity-10 flex justify-start items-start absolute top-0 left-0">
-          <div className="Absolute self-stretch h-9 flex justify-start items-start"></div>
+          <MainSpoon className="mt-4" />
+          <div className="text-blue-900 text-l font-normal font-['Pretendard'] leading-loose mt-4">
+            정책을 빠르고 쉽게 맛보다!
+          </div>
+          <div className="Group10429 w-80 h-12">
+            <KakaoLoginButton onClick={handleKakaoLogin} />
+          </div>
+          <div className="OsBarBottomNavigation h-12 bg-zinc-500/opacity-10 flex justify-center items-center w-full"></div>
+          <div className="OsBarTopNavigation h-9 w-full bg-zinc-500/opacity-10 flex justify-start items-start absolute top-0 left-0">
+            <div className="Absolute self-stretch h-9 flex justify-start items-start"></div>
+          </div>
         </div>
       </div>
     </ReactQueryClientProvider>
