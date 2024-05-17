@@ -11,14 +11,13 @@ interface BasicInputProps extends React.ComponentProps<"input"> {
 }
 
 const inputWrapperClasses = {
-  common:
-    "rounded-lg ring-1 ring-primary-400 p-2 flex focus-within:bg-[#f3f3f3]",
-  default: "ring-[#f3f3f3] bg-[#F4F4F5]",
-  error: "ring-[#F44B4B] focus-within:bg-[#f3f3f3]",
-  underline: "underline ring-0 ",
+  common: "rounded-lg p-2 flex w-full", // focus-within 및 ring 제거
+  default: "bg-[#F4F4F5]",
+  error: "",
+  underline: "underline ring-0",
 };
 const inputClasses = {
-  default: "outline-none flex-1",
+  default: "outline-none flex-1 w-full", // w-full 추가
   "default-font":
     "font-noto placeholder:text-[#787878] text-[15px] font-normal leading-normal",
   "default-ring": "",
