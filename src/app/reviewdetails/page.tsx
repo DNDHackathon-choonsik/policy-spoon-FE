@@ -12,7 +12,7 @@ import BookMarked from "@/svgs/BookMarked.svg";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const DetailsPage = () => {
+const ReviewDetailsPage = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const router = useRouter();
 
@@ -134,4 +134,4 @@ const DetailsPage = () => {
   );
 };
 
-export default DetailsPage;
+export default ReviewDetailsPage;
