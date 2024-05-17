@@ -4,6 +4,7 @@ import Button from "@/components/Button/Button";
 import BasicInput from "@/components/Input/BasicInput";
 import TopBottomBarTemplate from "@/components/Template/TopBottomBarPage";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import BackSpaceArrow from "@/svgs/BackSpaceArrow.svg";
 import ChatSend from "@/svgs/Send.svg";
 import ChatBubble from "@/components/chatting/ChatBubble";
@@ -14,6 +15,7 @@ const Page = () => {
   const [questionValue, setQuestionValue] = useState<string>("");
   const [sentMessages, setSentMessages] = useState<string[]>([]);
   const [receivedMessages, setReceivedMessages] = useState<string[]>([]);
+  const router = useRouter();
 
   const handleTitle = (value: string) => {
     if (value.length > 20) {
@@ -21,7 +23,11 @@ const Page = () => {
     }
     setQuestionValue(value);
   };
-  const handleWrite = async (message: string) => {
+
+  const handleWrite = async () => {
+    const message = questionValue.trim();
+    if (!message) return;
+
     try {
       const response = await getChatBot(message);
       setSentMessages((prevMessages) => [...prevMessages, message]);
@@ -39,18 +45,15 @@ const Page = () => {
     }
   }, [initialMessageSent]);
 
-  useEffect(() => {
-    if (!initialMessageSent) {
-      setInitialMessageSent(true);
-      setReceivedMessages(["안녕하세요! 👋 AI 챗봇입니다."]);
-    }
-  }, [initialMessageSent]);
   return (
     <>
       <TopBottomBarTemplate
         _topNode={
           <div className="relative flex h-full w-full items-center bg-transparent">
-            <div className="absolute left-[22px] [&>svg>path]:stroke-black">
+            <div
+              className="absolute left-[22px] [&>svg>path]:stroke-black cursor-pointer"
+              onClick={() => router.back()}
+            >
               <BackSpaceArrow />
             </div>
             <div className="flex flex-1 justify-center text-[16px] font-bold text-primary-300">
@@ -72,9 +75,14 @@ const Page = () => {
                   placeholder: "내용을 입력해주세요.",
                 }}
                 _value={questionValue}
-                _onChange={handleTitle}
+                _onChange={handleTitle} // 여기서 e 대신 value를 받습니다.
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleWrite();
+                }}
               />
-              <ChatSend onClick={handleWrite} />
+              <div className="cursor-pointer" onClick={handleWrite}>
+                <ChatSend />
+              </div>
             </div>
           </div>
         }
