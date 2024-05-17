@@ -1,15 +1,48 @@
 "use client";
+
 import Image from "next/image";
 import Review1 from "@/svgs/Review1.svg";
 import Review2 from "@/svgs/Review2.svg";
 import Review3 from "@/svgs/Review3.svg";
 import Check from "@/svgs/Check.svg";
 import Link from "next/link";
+import BookMark from "@/svgs/BookMark.svg";
+import GoBack from "@/svgs/goback.svg";
+import BookMarked from "@/svgs/BookMarked.svg";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const DetailsPage = () => {
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const router = useRouter();
+
+  const handleBookmarkClick = () => {
+    setIsBookmarked(!isBookmarked);
+  };
+
+  const handleGoBack = () => {
+    router.back();
+  };
+
   return (
-    <div className="w-96 h-96 relative bg-white">
-      <div className="Frame10419 w-96 h-96 left-0 top-0 absolute bg-white">
+    <div className="w-full h-full relative bg-white">
+      <div className="Frame10419 w-full h-full left-0 top-0 absolute bg-white">
+        <div
+          className="absolute top-[16px] left-[16px] cursor-pointer"
+          onClick={handleGoBack}
+        >
+          <GoBack className="w-6 h-6" />
+        </div>
+        <div
+          className="absolute top-[16px] right-[16px] cursor-pointer"
+          onClick={handleBookmarkClick}
+        >
+          {isBookmarked ? (
+            <BookMarked className="w-6 h-6" />
+          ) : (
+            <BookMark className="w-6 h-6" />
+          )}
+        </div>
         <Review1 className="w-full" />
         <div className="Group10445 w-60 h-20 left-[16px] top-[280px] absolute">
           <div className="px-2 py-px left-0 top-0 absolute bg-orange-100 rounded justify-start items-center gap-2.5 inline-flex">
@@ -17,7 +50,6 @@ const DetailsPage = () => {
               복지∙문화
             </div>
           </div>
-
           <div className="Group10442 w-60 h-14 left-0 top-[24px] absolute">
             <div className="left-0 top-0 absolute text-white text-2xl font-bold font-['Pretendard'] leading-9">
               청년 통장 발급후기
@@ -49,7 +81,6 @@ const DetailsPage = () => {
             </div>
           </div>
         </Link>
-
         <div className="Button w-auto h-auto px-3 py-1 left-0 top-[60px] absolute bg-violet-100 rounded-lg flex justify-center items-center">
           <div className="Content flex justify-center items-center gap-1.5">
             <div className="text-blue-600 text-sm font-bold font-['Pretendard'] leading-snug">
@@ -58,15 +89,12 @@ const DetailsPage = () => {
             <Check />
           </div>
         </div>
-
         <div className="left-0 top-[105px] absolute text-black text-sm font-normal font-['Pretendard'] leading-tight">
           ∙ 주민등록등복(초본)
           <br />∙ 신분증(주민센터 제출용)
         </div>
       </div>
       <div className="Line2 w-80 h-px left-[16px] top-[562px] absolute border border-neutral-200"></div>
-
-      <div className="BookmarkBookmarksTagsFavorite w-5 h-5 left-[342px] top-[63px] absolute" />
       <div className="w-80 h-52 left-[16px] top-[582px] absolute text-black text-base font-normal font-['Pretendard'] leading-normal">
         안녕하세요!
         <br />
@@ -91,7 +119,6 @@ const DetailsPage = () => {
           <Review3 className="w-full" />
         </div>
       </div>
-
       <div className="w-80 h-36 left-[16px] top-[1610px] absolute text-black text-base font-normal font-['Pretendard'] leading-normal">
         우선 위 사진은 청년통장 가입 신청서 입니다. 보시면 되게 작성해야 할
         정보들이 많은 걸 확인할 수 있습니다.
