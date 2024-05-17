@@ -1,0 +1,26 @@
+<svg width="100" height="54" viewBox="0 0 100 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="100" height="54" fill="#F5F5F5"/>
+<g id="Frame 10453" clip-path="url(#clip0_260_4)">
+<rect width="378" height="798" transform="translate(-145 -257)" fill="white"/>
+<g id="Group 10468">
+<circle id="Ellipse 29" cx="15.4109" cy="16.9934" r="7.20871" fill="#3F65EA"/>
+<g id="Rectangle 3014" filter="url(#filter0_b_260_4)">
+<rect x="31.1436" y="3" width="25.4425" height="33.9234" rx="2.54425" transform="rotate(30.0842 31.1436 3)" fill="#45609B"/>
+<rect x="30.5261" y="0.682083" width="28.8349" height="37.3157" rx="4.24042" transform="rotate(30.0842 30.5261 0.682083)" stroke="white" stroke-width="3.39234"/>
+</g>
+<path id="Union" fill-rule="evenodd" clip-rule="evenodd" d="M100 29.2608C100 26.467 97.7354 24.2021 94.9416 24.2021H42.9753L5.26488 24.2022C2.47105 24.2022 0.161223 26.4847 0.63014 29.2389C3.02342 43.2959 15.2628 53.9976 30.0017 53.9976C41.1277 53.9976 50.8294 47.8993 55.9466 38.863C56.9458 37.0984 58.7436 35.8664 60.7715 35.8664H94.9416C97.7354 35.8664 100 33.6015 100 30.8077V29.2608Z" fill="#173577"/>
+<rect id="Rectangle 3017" x="5.65771" y="20.8098" width="51.7331" height="3.39234" fill="white"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_b_260_4" x="8.28589" y="-2.85303" width="50.7261" height="53.8132" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImageFix" stdDeviation="1.69617"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_260_4"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_260_4" result="shape"/>
+</filter>
+<clipPath id="clip0_260_4">
+<rect width="378" height="798" fill="white" transform="translate(-145 -257)"/>
+</clipPath>
+</defs>
+</svg>

@@ -14,13 +14,11 @@ const Kakao = () => {
   const [user, setUser] = useRecoilState(loginState);
 
   const getToken = async () => {
-    if (!code) {
-      return;
-    }
+    if (!code) return;
 
     try {
       const response = await axios.get(
-        `https://${BASE_URL}/login/oauth2/code/kakao?code=${code}&state=${state}`,
+        `http://${BASE_URL}/login/oauth2/code/kakao?code=${code}&state=${state}`,
         {
           headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -28,17 +26,13 @@ const Kakao = () => {
         }
       );
       const data = response.data.data;
+      console.log("Token response data:", data);
       setUser(data);
       LocalStorage.setItem("accessToken", data.accessToken);
-      LocalStorage.setItem("oauthAccessToken", data.oauthAccessToken);
 
-      if (data.role === "ROLE_EMPTY") {
-        router.push("/trainer-select");
-      } else {
-        router.push("/health-management");
-      }
-    } catch (err) {
-      console.log("err", err);
+      router.push("/signup-gender");
+    } catch (error) {
+      console.error("Failed to fetch token:", error);
     }
   };
 
@@ -47,17 +41,15 @@ const Kakao = () => {
   }, [code]);
 
   useEffect(() => {
-    console.log(user);
+    console.log("User state:", user);
   }, [user]);
 
   return (
-    <>
-      <div>
-        카카오 로그인 진행중 ...
-        <br />
-        Loading...
-      </div>
-    </>
+    <div>
+      카카오 로그인 진행중 ...
+      <br />
+      Loading...
+    </div>
   );
 };
 
