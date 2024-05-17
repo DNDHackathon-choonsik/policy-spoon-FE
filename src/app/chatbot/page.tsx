@@ -13,8 +13,9 @@ import OtherChatBox from "@/components/chatting/OtherChatBox";
 const Page = () => {
   const [initialMessageSent, setInitialMessageSent] = useState(false);
   const [questionValue, setQuestionValue] = useState<string>("");
-  const [sentMessages, setSentMessages] = useState<string[]>([]);
-  const [receivedMessages, setReceivedMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<
+    { from: "me" | "other"; text: string; time: Date }[]
+  >([]);
   const router = useRouter();
 
   const handleTitle = (value: string) => {
@@ -28,11 +29,19 @@ const Page = () => {
     const message = questionValue.trim();
     if (!message) return;
 
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { from: "me", text: message, time: new Date() },
+    ]);
+    setQuestionValue("");
+
     try {
       const response = await getChatBot(message);
-      setSentMessages((prevMessages) => [...prevMessages, message]);
-      setReceivedMessages((prevMessages) => [...prevMessages, response]);
-      setQuestionValue("");
+      const formattedResponse = response.replace(/^Context:.*\n/, ""); // Context 부분 잘라내기
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { from: "other", text: formattedResponse, time: new Date() },
+      ]);
     } catch (error) {
       console.error("Error in handleWrite:", error);
     }
@@ -41,7 +50,13 @@ const Page = () => {
   useEffect(() => {
     if (!initialMessageSent) {
       setInitialMessageSent(true);
-      setReceivedMessages(["안녕하세요! 👋 AI 챗봇입니다."]);
+      setMessages([
+        {
+          from: "other",
+          text: "안녕하세요! 👋 AI 챗봇입니다.",
+          time: new Date(),
+        },
+      ]);
     }
   }, [initialMessageSent]);
 
@@ -75,7 +90,7 @@ const Page = () => {
                   placeholder: "내용을 입력해주세요.",
                 }}
                 _value={questionValue}
-                _onChange={handleTitle} // 여기서 e 대신 value를 받습니다.
+                _onChange={handleTitle}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleWrite();
                 }}
@@ -88,20 +103,21 @@ const Page = () => {
         }
         _contentDivProps={{ className: "bg-white overflow-auto" }}
       >
-        <div className="relative flex h-full w-full flex-col gap-6 bg-white p-5 ">
-          {/* sent messages */}
-          {sentMessages.map((msg, index) => (
-            <div key={`sent-${index}`} className="flex justify-end">
-              <ChatBubble _from="me" _text={msg} _time={new Date()} />
-            </div>
-          ))}
-
-          {/*received messages */}
-          {receivedMessages.map((msg, index) => (
-            <div key={`received-${index}`} className="flex justify-start">
-              <OtherChatBox _name="정책스푼 AI 챗봇" _profileSrc="">
-                <ChatBubble _from="other" _text={msg} _time={new Date()} />
-              </OtherChatBox>
+        <div className="relative flex h-full w-full flex-col gap-6 bg-white p-5">
+          {messages.map((msg, index) => (
+            <div
+              key={index}
+              className={`flex ${
+                msg.from === "me" ? "justify-end" : "justify-start"
+              }`}
+            >
+              {msg.from === "me" ? (
+                <ChatBubble _from="me" _text={msg.text} _time={msg.time} />
+              ) : (
+                <OtherChatBox _name="정책스푼 AI 챗봇" _profileSrc="">
+                  <ChatBubble _from="other" _text={msg.text} _time={msg.time} />
+                </OtherChatBox>
+              )}
             </div>
           ))}
         </div>
