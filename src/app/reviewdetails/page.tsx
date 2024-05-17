@@ -9,8 +9,9 @@ import Link from "next/link";
 import BookMark from "@/svgs/BookMark.svg";
 import GoBack from "@/svgs/goback.svg";
 import BookMarked from "@/svgs/BookMarked.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { getReview } from "@/apis/api";
 
 const ReviewDetailsPage = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -23,6 +24,14 @@ const ReviewDetailsPage = () => {
   const handleGoBack = () => {
     router.back();
   };
+
+  const fetchData = async () => {
+    const communityData = await getReview();
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="w-full h-full relative bg-white">
