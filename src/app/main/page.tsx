@@ -18,6 +18,7 @@ import Pencil from "@/svgs/bluepencil.svg";
 import Button from "@/components/Button/Button";
 import Fab from "@/components/FAB/Fab";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Page = () => {
   const categoryList = [
@@ -242,21 +243,23 @@ const Page = () => {
             </Button>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <div className="gap-4">
-              <Review1 />
-              <h1 className="font-semibold text-[15px] text-black">
-                청년 통장 발급 후기
-              </h1>
-              <p className="font-medium text-[12px] text-[#37383C]">
-                으뜸 관악 청년 통장
-              </p>
-              <Box
-                className="px-2 py-0 rounded-[4px] flex items-center justify-center font-medium text-[12px] text-[#FF8E3D] bg-[#FFEDE0]"
-                style={{ display: "inline-block" }}
-              >
-                복지∙문화
-              </Box>
-            </div>
+            <Link href="/reviewdetails" passHref>
+              <div className="gap-4">
+                <Review1 />
+                <h1 className="font-semibold text-[15px] text-black">
+                  청년 통장 발급 후기
+                </h1>
+                <p className="font-medium text-[12px] text-[#37383C]">
+                  으뜸 관악 청년 통장
+                </p>
+                <Box
+                  className="px-2 py-0 rounded-[4px] flex items-center justify-center font-medium text-[12px] text-[#FF8E3D] bg-[#FFEDE0]"
+                  style={{ display: "inline-block" }}
+                >
+                  복지∙문화
+                </Box>
+              </div>
+            </Link>
             <div className="gap-4">
               <Review2 />
               <h1 className="font-semibold text-[15px] text-black">
