@@ -36,3 +36,47 @@ export const getReview = async () => {
   });
   return response.data.data;
 };
+
+export const getSearch = async (searchValue: string) => {
+  const response = await axios.get(
+    `http://192.168.10.116:4321/policies?title=${searchValue}`,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer ` + ACCESS_TOKEN,
+      },
+    }
+  );
+  return response.data.data;
+};
+
+export const getReviewPost = async (
+  reviewTitle: string,
+  policyTitle: string,
+  content: string,
+  category: string
+) => {
+  try {
+    const response = await axios.post(
+      `http://192.168.10.116:4321/review`,
+      {
+        reviewTitle: reviewTitle,
+        policyTitle: policyTitle,
+        content: content,
+        category: category,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ` + ACCESS_TOKEN,
+        },
+      }
+    );
+    return response.data.data;
+  } catch (error) {
+    console.error("Error handling:", error);
+    return null;
+  }
+};

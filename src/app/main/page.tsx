@@ -18,6 +18,8 @@ import Pencil from "@/svgs/bluepencil.svg";
 import Button from "@/components/Button/Button";
 import Fab from "@/components/FAB/Fab";
 import { useRouter } from "next/navigation";
+import { getSearch } from "@/apis/api";
+import Link from "next/link";
 
 const Page = () => {
   const categoryList = [
@@ -29,40 +31,11 @@ const Page = () => {
     "💼  일자리",
   ];
 
-  //   const reviewList = [
-  //     {
-  //       key: 1,
-  //       title: "청년 통장 발급 후기",
-  //       metaData: "으뜸 관악 청년 통장",
-  //       category: "복지∙문화",
-  //       path: "../../svgs/review1.svg",
-  //       background: "#FFEDE0",
-  //       color: "#FF8E3D",
-  //     },
-  //     {
-  //       key: 2,
-  //       title: "취업 멘토링 꽤 괜찮네요",
-  //       metaData: "관악구∙삼성전자 청년 취업 멘토링",
-  //       category: "교육",
-  //       path: "../../svgs/review2.svg",
-  //     },
-  //     {
-  //       key: 3,
-  //       title: "청년주택 입주 신청했어요",
-  //       metaData: "관악구 청년주택 입주자 추가 모집",
-  //       category: "주거",
-  //       path: `../../svgs/review3.svg`,
-  //     },
-  //     {
-  //       key: 4,
-  //       title: "신림동 쓰리룸 방문 후기",
-  //       metaData: "청년문화공간 신림동 쓰리룸 운영",
-  //       category: "참여∙권리",
-  //       path: "../../svgs/review4.svg",
-  //     },
-  //   ];
-
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const handleSearchChange = (value: string) => {
+    setSearchValue(value);
+  };
 
   const handleAddressClick = (address: string) => {
     setSelectedAddress(address);
@@ -126,14 +99,16 @@ const Page = () => {
     return () => clearInterval(interval);
   }, [banners.length]);
 
-  const circleColors = [blueCircle, grayCircle, grayCircle];
+  const handleSubmit = async () => {
+    router.push(`/search?id=${searchValue}`);
+  };
 
   const router = useRouter();
   return (
     <>
       <div className="bg-[#E7EBF9] h-[289px] relative">
         <div className="flex justify-center py-4">
-          <Logo />
+          <Logo width={70} />
         </div>
         <div className="p-4 relative z-10">
           <div className="pt-6 pb-10">
@@ -150,9 +125,9 @@ const Page = () => {
             _inputProps={{
               placeholder: "'월세 지원금'을 검색해보세요",
             }}
-            _rightNode={<Search />}
-            _onChange={() => {}}
-            _value=""
+            _rightNode={<Search onClick={handleSubmit} />}
+            _onChange={handleSearchChange}
+            _value={searchValue}
           />
         </div>
         <div className="absolute top-2 right-0 z-0">
@@ -183,7 +158,7 @@ const Page = () => {
                 {categoryList.map((item, index) => (
                   <Box
                     key={index}
-                    className={`rounded-[8px] px-4 flex-shrink-0 whitespace-nowrap flex justify-center items-center  ${
+                    className={`hover:cursor-pointer rounded-[8px] px-4 flex-shrink-0 whitespace-nowrap flex justify-center items-center  ${
                       selectedAddress === item
                         ? "bg-primary-300 text-white"
                         : "ring-1 ring-[#BFBFC1] text-[#BFBFC1]"
@@ -216,20 +191,6 @@ const Page = () => {
                 </div>
               ))}
             </div>
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-4 flex items-center space-x-2">
-              {circleColors.map((circle, index) => (
-                <img
-                  key={index}
-                  src={circle}
-                  alt={`Circle ${index + 1}`}
-                  className={`w-4 h-4 ${
-                    index === currentBannerIndex
-                      ? "text-blue-500"
-                      : "text-gray-500"
-                  }`}
-                />
-              ))}
-            </div>
           </div>
         </div>
         <div>
@@ -237,7 +198,10 @@ const Page = () => {
             <h1 className="font-bold text-[20px] text-black">
               <span className="text-primary-200">내 맞춤형</span> 정책의 후기
             </h1>
-            <Button className="p-2 gap-1 flex items-center justify-center w-[109px] h-[26px] rounded-[8px] bg-primary-100 font-bold text-[13px] text-primary-200">
+            <Button
+              onClick={() => router.push("/write-review")}
+              className="p-2 gap-1 flex items-center justify-center w-[109px] h-[26px] rounded-[8px] bg-primary-100 font-bold text-[13px] text-primary-200"
+            >
               후기 작성하기 <Pencil />
             </Button>
           </div>
