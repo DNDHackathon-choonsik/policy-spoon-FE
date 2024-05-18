@@ -19,6 +19,7 @@ import Button from "@/components/Button/Button";
 import Fab from "@/components/FAB/Fab";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import CircleIndicators from "./CircleIndicators";
 
 const Page = () => {
   const categoryList = [
@@ -29,39 +30,6 @@ const Page = () => {
     "🙌  참여∙권리",
     "💼  일자리",
   ];
-
-  //   const reviewList = [
-  //     {
-  //       key: 1,
-  //       title: "청년 통장 발급 후기",
-  //       metaData: "으뜸 관악 청년 통장",
-  //       category: "복지∙문화",
-  //       path: "../../svgs/review1.svg",
-  //       background: "#FFEDE0",
-  //       color: "#FF8E3D",
-  //     },
-  //     {
-  //       key: 2,
-  //       title: "취업 멘토링 꽤 괜찮네요",
-  //       metaData: "관악구∙삼성전자 청년 취업 멘토링",
-  //       category: "교육",
-  //       path: "../../svgs/review2.svg",
-  //     },
-  //     {
-  //       key: 3,
-  //       title: "청년주택 입주 신청했어요",
-  //       metaData: "관악구 청년주택 입주자 추가 모집",
-  //       category: "주거",
-  //       path: `../../svgs/review3.svg`,
-  //     },
-  //     {
-  //       key: 4,
-  //       title: "신림동 쓰리룸 방문 후기",
-  //       metaData: "청년문화공간 신림동 쓰리룸 운영",
-  //       category: "참여∙권리",
-  //       path: "../../svgs/review4.svg",
-  //     },
-  //   ];
 
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
 
@@ -217,20 +185,10 @@ const Page = () => {
                 </div>
               ))}
             </div>
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-4 flex items-center space-x-2">
-              {circleColors.map((circle, index) => (
-                <img
-                  key={index}
-                  src={circle}
-                  alt={`Circle ${index + 1}`}
-                  className={`w-4 h-4 ${
-                    index === currentBannerIndex
-                      ? "text-blue-500"
-                      : "text-gray-500"
-                  }`}
-                />
-              ))}
-            </div>
+            <CircleIndicators
+              circleColors={circleColors}
+              currentBannerIndex={currentBannerIndex}
+            />
           </div>
         </div>
         <div>
