@@ -51,11 +51,22 @@ export const getSearch = async (searchValue: string) => {
   return response.data.data;
 };
 
+export const getReviewList = async () => {
+  const response = await axios.get(`http://192.168.10.116:4321/review/list`, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: `Bearer ` + ACCESS_TOKEN,
+    },
+  });
+  return response.data.data;
+};
+
 export const getReviewPost = async (
-  reviewTitle: string,
+  category: string,
   policyTitle: string,
-  content: string,
-  category: string
+  reviewTitle: string,
+  content: string
 ) => {
   try {
     const response = await axios.post(
