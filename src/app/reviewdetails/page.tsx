@@ -13,6 +13,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getReview } from "@/apis/api";
 
+interface ReviewData {
+  category: string;
+  reviewTitle: string;
+  createdDate: string;
+  writer: string;
+  link: string;
+  tips: string;
+  content: string;
+}
 
 const ReviewDetailsPage = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -40,14 +49,6 @@ const ReviewDetailsPage = () => {
   if (!reviewData) {
     return <div>Loading...</div>;
   }
-
-  const fetchData = async () => {
-    const communityData = await getReview();
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <div className="w-full h-full relative bg-white">
@@ -135,7 +136,7 @@ const ReviewDetailsPage = () => {
       <div className="w-80 h-52 left-[16px] top-[582px] absolute text-black text-base font-normal font-['Pretendard'] leading-normal">
         {reviewData.content}
       </div>
-      <div className="w-80 h-24 left-[16px] top-[780px] absolute text-black text-base font-normal font-['Pretendard'] leading-normal">
+      <div className="w-80 h-24 left-[780px] top-[1023px] absolute text-black text-base font-normal font-['Pretendard'] leading-normal">
         <div>
           <Review_3 className="w-full" />
         </div>
