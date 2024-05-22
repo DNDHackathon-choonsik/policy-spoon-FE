@@ -8,7 +8,7 @@ import Check from "@/svgs/Check.svg";
 import Link from "next/link";
 import BookMark from "@/svgs/BookMark.svg";
 import GoBack from "@/svgs/goback.svg";
-import BookMarked from "@/svgs/BookMarked.svg";
+import BookMarked from "@/svgs/bookMarked.svg";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getReview } from "@/apis/api";
