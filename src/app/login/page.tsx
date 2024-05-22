@@ -16,17 +16,13 @@ export default function LoginPage() {
 
   return (
     <ReactQueryClientProvider>
-      <div className="bg-white flex flex-col items-center justify-between">
-        <div className="w-24 h-6 mt-36"></div>
-        <div className="w-24 h-6 mt-36"></div>
-        <MainSpoon className="mt-4" />
-        <div className=" h-12 bg-zinc-500/opacity-10 flex justify-center items-center w-full">
+      <div className="h-[100vh] bg-white flex justify-center items-center">
+        <div className=" flex flex-col items-center justify-between gap-4">
+          <MainSpoon className="mt-4" />
           <SpoonLogo width={100} />
-        </div>
-        <div className="text-blue-900 text-xl font-normal font-['Pretendard'] leading-loose">
-          정책을 빠르고 쉽게 맛보다!
-        </div>
-        <div className="Group10429 w-80 h-12">
+          <div className="text-blue-900 text-xl font-normal">
+            정책을 빠르고 쉽게 맛보다!
+          </div>
           <KakaoLoginButton onClick={handleKakaoLogin} />
         </div>
       </div>
