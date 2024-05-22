@@ -6,7 +6,7 @@ import Review_2 from "@/svgs/Review_2.svg";
 import Review_3 from "@/svgs/Review_3.svg";
 import Check from "@/svgs/Check.svg";
 import Link from "next/link";
-import BookMark from "@/svgs/BookMark.svg";
+import BookMark from "@/svgs/bookmark.svg";
 import GoBack from "@/svgs/goback.svg";
 import BookMarked from "@/svgs/BookMarked.svg";
 import { useEffect, useState } from "react";
