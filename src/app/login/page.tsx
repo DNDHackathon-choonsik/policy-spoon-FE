@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import ReactQueryClientProvider from "../ReactQueryClientProvider";
 import { BASE_URL } from "@/utils/routePath";
 import SpoonLogo from "@/svgs/spoonLogo.svg";
-import MainSpoon from "@/svgs/MainSpoon.svg";
+import MainSpoon from "@/svgs/mainspoon.svg";
 import KakaoLoginButton from "@/svgs/kakaologinbutton.svg";
 
 export default function LoginPage() {
