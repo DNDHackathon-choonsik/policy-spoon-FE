@@ -18,8 +18,8 @@ import Pencil from "@/svgs/bluepencil.svg";
 import Button from "@/components/Button/Button";
 import Fab from "@/components/FAB/Fab";
 import { useRouter } from "next/navigation";
-import { getReviewList, getSearch } from "@/apis/api";
 import Link from "next/link";
+import CircleIndicators from "./CircleIndicators";
 
 const Page = () => {
   const categoryList = [
@@ -32,11 +32,6 @@ const Page = () => {
   ];
 
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [review, setReview] = useState<any>("");
-  const handleSearchChange = (value: string) => {
-    setSearchValue(value);
-  };
 
   const handleAddressClick = (address: string) => {
     setSelectedAddress(address);
@@ -100,23 +95,14 @@ const Page = () => {
     return () => clearInterval(interval);
   }, [banners.length]);
 
-  const handleSubmit = async () => {
-    router.push(`/search?id=${searchValue}`);
-  };
-  const fetchData = async () => {
-    const response = await getReviewList();
-    setReview(response);
-  };
+  const circleColors = [blueCircle, grayCircle, grayCircle];
 
-  useEffect(() => {
-    fetchData();
-  }, []);
   const router = useRouter();
   return (
     <>
       <div className="bg-[#E7EBF9] h-[289px] relative">
         <div className="flex justify-center py-4">
-          <Logo width={70} />
+          <Logo />
         </div>
         <div className="p-4 relative z-10">
           <div className="pt-6 pb-10">
@@ -133,9 +119,9 @@ const Page = () => {
             _inputProps={{
               placeholder: "'월세 지원금'을 검색해보세요",
             }}
-            _rightNode={<Search onClick={handleSubmit} />}
-            _onChange={handleSearchChange}
-            _value={searchValue}
+            _rightNode={<Search />}
+            _onChange={() => {}}
+            _value=""
           />
         </div>
         <div className="absolute top-2 right-0 z-0">
@@ -166,7 +152,7 @@ const Page = () => {
                 {categoryList.map((item, index) => (
                   <Box
                     key={index}
-                    className={`hover:cursor-pointer rounded-[8px] px-4 flex-shrink-0 whitespace-nowrap flex justify-center items-center  ${
+                    className={`rounded-[8px] px-4 flex-shrink-0 whitespace-nowrap flex justify-center items-center  ${
                       selectedAddress === item
                         ? "bg-primary-300 text-white"
                         : "ring-1 ring-[#BFBFC1] text-[#BFBFC1]"
@@ -199,6 +185,10 @@ const Page = () => {
                 </div>
               ))}
             </div>
+            <CircleIndicators
+              circleColors={circleColors}
+              currentBannerIndex={currentBannerIndex}
+            />
           </div>
         </div>
         <div>
@@ -206,55 +196,28 @@ const Page = () => {
             <h1 className="font-bold text-[20px] text-black">
               <span className="text-primary-200">내 맞춤형</span> 정책의 후기
             </h1>
-            <Button
-              onClick={() => router.push("/write-review")}
-              className="p-2 gap-1 flex items-center justify-center w-[109px] h-[26px] rounded-[8px] bg-primary-100 font-bold text-[13px] text-primary-200"
-            >
+            <Button className="p-2 gap-1 flex items-center justify-center w-[109px] h-[26px] rounded-[8px] bg-primary-100 font-bold text-[13px] text-primary-200">
               후기 작성하기 <Pencil />
             </Button>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            {review &&
-              review.map((item: any) => (
-                <div
-                  key={item.id}
-                  className="hover:cursor-pointer gap-4"
-                  onClick={() => router.push("/reviewdetails")}
+            <Link href="/reviewdetails" passHref>
+              <div className="gap-4">
+                <Review1 />
+                <h1 className="font-semibold text-[15px] text-black">
+                  청년 통장 발급 후기
+                </h1>
+                <p className="font-medium text-[12px] text-[#37383C]">
+                  으뜸 관악 청년 통장
+                </p>
+                <Box
+                  className="px-2 py-0 rounded-[4px] flex items-center justify-center font-medium text-[12px] text-[#FF8E3D] bg-[#FFEDE0]"
+                  style={{ display: "inline-block" }}
                 >
-                  <Review1 />
-                  <h1 className="font-semibold text-[15px] text-black">
-                    {item.reviewTitle}
-                  </h1>
-                  <p className="font-medium text-[12px] text-[#37383C]">
-                    {item.content}
-                  </p>
-                  <Box
-                    className="px-2 py-0 rounded-[4px] flex items-center justify-center font-medium text-[12px] text-[#FF8E3D] bg-[#FFEDE0]"
-                    style={{ display: "inline-block" }}
-                  >
-                    {item.category}
-                  </Box>
-                </div>
-              ))}
-
-            {/* <div
-              className="hover:cursor-pointer gap-4"
-              onClick={() => router.push("/reviewdetails")}
-            >
-              <Review1 />
-              <h1 className="font-semibold text-[15px] text-black">
-                청년 통장 발급 후기
-              </h1>
-              <p className="font-medium text-[12px] text-[#37383C]">
-                으뜸 관악 청년 통장
-              </p>
-              <Box
-                className="px-2 py-0 rounded-[4px] flex items-center justify-center font-medium text-[12px] text-[#FF8E3D] bg-[#FFEDE0]"
-                style={{ display: "inline-block" }}
-              >
-                복지∙문화
-              </Box>
-            </div>
+                  복지∙문화
+                </Box>
+              </div>
+            </Link>
             <div className="gap-4">
               <Review2 />
               <h1 className="font-semibold text-[15px] text-black">
@@ -299,7 +262,7 @@ const Page = () => {
               >
                 참여∙권리
               </Box>
-            </div> */}
+            </div>
           </div>
         </div>
         <Fab

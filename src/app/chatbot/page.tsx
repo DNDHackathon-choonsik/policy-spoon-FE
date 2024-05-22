@@ -19,9 +19,6 @@ const Page = () => {
   const router = useRouter();
 
   const handleTitle = (value: string) => {
-    if (value.length > 20) {
-      value = value.slice(0, 20);
-    }
     setQuestionValue(value);
   };
 
