@@ -77,7 +77,7 @@ const Page = ({ searchParams }: { searchParams: { id: string } }) => {
         />
 
         <p className="py-4 text-[16px] font-medium text-[#787878]">
-          '{search}'가(이) 포함된 결과입니다.
+          &apos;{search}&apos;가(이) 포함된 결과입니다.
         </p>
         {data &&
           data.map((item: any) => (
